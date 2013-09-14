@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="span8">
+    <div class="row">
+      <div class="span8">
+        <h4><strong><a href="#">
+            <% if(media.value.media_type == 'audio') {%>
+                                <i class="icon-music"></i>
+                                <%}%>
+                                <% if(media.value.media_type == 'video') {%>
+                                <i class="icon-film"></i>
+                                <%}%>
+                                <% if(media.value.media_type == 'image' || media.value.media_type == 'slide' ) {%>
+                                <i class="icon-picture"></i>
+                                <%}%>
+
+            <%= media.value.name %></a></strong></h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2">
+        <a href="#" class="thumbnail">
+            <% if(uploads && uploads.length >0 && media.value.media_type == 'image') {%>
+                <img src="/<%= uploads[uploads.length-1].value.path %>" alt="image">
+            <%} else {%>
+                <% if(media.value.media_type == 'video') {%>
+                    <img src="/img/Video-Icon-150x150.jpg" alt="video"></i>
+                <% } else if(media.value.media_type == 'audio') {%>
+                    <img src="/img/Audio-Icon-150x150.jpg" alt="audio"></i>
+                <%} else {%>
+                    <img src="http://placehold.it/260x180" alt="">
+                <%}%>
+            <%}%>
+        </a>
+      </div>
+      <div class="span6">
+        <p>
+            <strong>Description</strong>
+            <p>
+            <% if(media.value.description) {%><%= media.value.description %><% } %>
+            </p>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <p></p>
+        <p>
+          <i class="icon-user"></i> by <a href="#"><% if(media.value.author) { %><%= media.value.author %><% } %>  </a>
+          | <i class="icon-calendar"></i> <% if(media.value.creation_date) { %><%=media.value.creation_date %><% } %>
+          | <i class="icon-comment"></i> <a href="#">3 Comments</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+    </div>
+
+      <div class="row">
+        <div class="span8 well">
+          <p><strong>File(s) </strong>  <span class="label label-info">  <% if(uploads) {%><%= uploads.length %> <%}%> </span>        </p>
+          <p>
+            <% if(uploads) {%>
+            <ul class="thumbnails">
+                <% for(var i=0; i<uploads.length; i++) { %>
+                <li class="span5 clearfix">
+                  <div class="thumbnail clearfix">
+                      <a href="/<%= uploads[i].value.path %>">
+                      <% if(uploads[i].value.upload_type === 'image') {%>
+                        <img src="/<%= uploads[i].value.path %>" alt="" class="pull-left span2 clearfix" style='margin-right:10px'>
+                      <%} else {%>
+                      <% if(uploads[i].value.upload_type === 'video') {%>
+                        <i class="icon-film icon-4x span2" style="margin-right:10px; margin-left: 10px; margin-bottom: 10px;margin-top: 10px;"></i>
+                      <%}%>
+                      <% if(uploads[i].value.upload_type === 'audio') {%>
+                          <i class="icon-music icon-4x span2" style="margin-right:10px; margin-left: 10px; margin-bottom: 10px;margin-top: 10px;"></i>
+                      <%}%>
+                      <%}%>
+                      </a>
+                    <div class="caption" class="pull-left">
+                       <p>
+                           <a href="#myModalRemoveFile" data-toggle="modal"><span class="label label-info pull-right"> remove </span></a>
+                           <b>Author: </b><h4> <a href="#" ><%= uploads[i].value.author %></a></h4>
+                        </p>
+                        <p>
+                            <small><b>Date: </b><%= uploads[i].value.modification_date %></small>
+                        </p>
+                    </div>
+                  </div>
+                </li>
+                <%}%>
+            </ul>
+            <%}%>
+          </p>
+          <a href="#myModalAddFile" data-toggle="modal"><span class="btn btn-primary"> Upload file </span></a>
+        </div>
+      </div>
+  </div>
+</div>
+<hr>
+
+<div class="modal small hide" id="myModalAddFile">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Upload a file</h3>
+    </div>
+    <div class="modal-body">
+        <form method="post" enctype="multipart/form-data" action='/medias/<%= media.id %>/uploadFile'>
+            <p><input type="hidden" class="span3" name="mediaid" value="<%= media.id %>" ></p>
+            <p><input type="hidden" class="span3" name="mediatype" value="<%= media.value.media_type %>"></p>
+            <p><input type="file" class="span3" name="filename" ></p>
+            <p><button type="submit" class="btn btn-primary">Add file</button></p>
+        </form>
+    </div>
+</div>

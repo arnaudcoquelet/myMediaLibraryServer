@@ -1,0 +1,102 @@
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Media</th>
+          <th>Type</th>
+          <th>Id</th>
+            <th style="width: 36px;">
+                <a href="#myModalNewMedia" data-toggle="modal"><span class="label label-info"><i class="icon-media" ></i> New Media</span></a>
+            </th>
+        </tr>
+      </thead>
+      <tbody>
+          <% for(var i=0; i<medias.length; i++) { %>
+              <tr>
+                <td><%= i + 1 %></td>
+                <td><a href="/medias/<%= medias[i].id%>">
+                    <% if(medias[i].value.media_type == 'audio') {%>
+                    <i class="icon-music"></i>
+                    <%}%>
+                    <% if(medias[i].value.media_type == 'video') {%>
+                    <i class="icon-film"></i>
+                    <%}%>
+                    <% if(medias[i].value.media_type == 'image' || medias[i].value.media_type == 'slide' ) {%>
+                    <i class="icon-picture"></i>
+                    <%}%>
+                     <%= medias[i].key %></a>
+                </td>
+                <td>
+                    <%= medias[i].value.media_type %></td>
+                <td><%= medias[i].id %></td>
+                <td>
+                    <a href="/medias/<%= medias[i].id %> "><i class="icon-pencil" ></i></a>
+                    <a href="#myModalDeleteMedia" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+                </td>
+              </tr>
+          <% } %>
+      </tbody>
+    </table>
+</div>
+<div class="pagination">
+    <ul>
+        <li><a href="#"><i class="icon-caret-left" ></i> Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next <i class="icon-caret-right" ></i></a></li>
+    </ul>
+</div>
+
+
+
+<div class="modal hide" id="myModalNewMedia">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <H4>Add a new Media</H4>
+    </div>
+    <div class="modal-body">
+        <form method="post" action='/medias'>
+            <p><input type="text" class="span3" name="medianame" placeholder="Media Name"></p>
+            <div class="control-group">
+                <p class="pull-left">
+                    <label for="mediatype" class="control-label">Type</label>
+                </p>
+                <div class="controls">
+                   <select name="mediatype" id="mediatype">
+                        <option value="video">Video</option>
+                        <option value="audio">Audio</option>
+                        <option value="image">Image</option>
+                        <!-- <option value="slide">Slide</option> -->
+                   </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <p class="pull-left">
+                    <label for="description" class="control-label">Description</label>
+                </p>
+                <div class="controls">
+                    <input type="text" class="form-control" placeholder="Description" id="description" name="description">
+                </div>
+            </div>
+            <p><button type="submit" class="btn btn-primary">New Media</button></p>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal small hide fade" id="myModalDeleteMedia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text">Are you sure you want to delete the media ?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="well">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Login</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Extension</th>
+          <th>Id</th>
+          <th style="width: 36px;">
+              <a href="#myModalNewUser" data-toggle="modal"><span class="label label-info"><i class="icon-user" ></i> New User</span></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          <% for(var i=0; i<users.length; i++) { %>
+              <tr>
+                <td><%= i + 1 %></td>
+                <td><a href="/users/<%= users[i].id%>"><i class="icon-user"></i>  <%= users[i].key %></a></td>
+                <td><%= users[i].value.name %></td>
+                <td><%= users[i].value.contact.email %></td>
+                <td><%= users[i].value.contact.extension %></td>
+                <td><%= users[i].id %></td>
+                <td>
+                    <% if(users[i].id != "admin" ) { %>
+                    <a href="/users/<%= users[i].id %> "><i class="icon-pencil" ></i></a>
+                    <a href="#myModalDeleteUser" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+                    <% } %>
+                </td>
+              </tr>
+          <% } %>
+      </tbody>
+    </table>
+</div>
+<div class="pagination">
+    <ul>
+        <li><a href="#"><i class="icon-caret-left" ></i> Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next <i class="icon-caret-right" ></i></a></li>
+    </ul>
+</div>
+
+
+
+<div class="modal hide" id="myModalNewUser">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+        <form method="post" action='/users'>
+            <p>New Group Name</p>
+            <p><input type="text" class="span3" name="login" placeholder="login"></p>
+            <p><input type="text" class="span3" name="name" placeholder="name"></p>
+            <p><input type="text" class="span3" name="email" placeholder="email"></p>
+            <p><input type="text" class="span3" name="extension" placeholder="extension"></p>
+            <p><button type="submit" class="btn btn-primary">New User</button></p>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal small hide fade" id="myModalDeleteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text">Are you sure you want to delete the user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+
+
+<div class="well">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Group</th>
+          <th>Members</th>
+          <th>Id</th>
+          <th style="width: 36px;">
+              <a href="#myModalNewGroup" data-toggle="modal"><span class="label label-info"><i class="icon-group" ></i> New Group</span></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          <% for(var i=0; i<groups.length; i++) { %>
+              <tr>
+                <td><%= i + 1 %></td>
+                <td><a href="/groups/<%= groups[i].id%>"><i class="icon-group"></i>  <%= groups[i].key %></a></td>
+                <td><a href="/groups/<%= groups[i].id%>"> <span class="label label-info"><%= groups[i].value.users.length%></span></a> </td>
+                <td><%= groups[i].id %></td>
+                <td>
+                    <% if(groups[i].id != "adminGroup" ) { %>
+                    <a href="/groups/<%= groups[i].id %> "><i class="icon-pencil" ></i></a>
+                    <a href="#myModalDeleteGroup" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+                    <% } %>
+                </td>
+              </tr>
+          <% } %>
+      </tbody>
+    </table>
+
+</div>
+<div class="pagination">
+    <ul>
+        <li><a href="#"><i class="icon-caret-left" ></i> Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next <i class="icon-caret-right" ></i></a></li>
+    </ul>
+</div>
+
+
+
+<div class="modal small hide" id="myModalNewGroup">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>New Group</h3>
+    </div>
+    <div class="modal-body">
+        <form method="post" action='/groups'>
+            <p><input type="text" class="span3" name="groupname" placeholder="Group Name"></p>
+            <p><button type="submit" class="btn btn-primary">New Group</button></p>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal small hide fade" id="myModalDeleteGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text">Are you sure you want to delete the group ?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>

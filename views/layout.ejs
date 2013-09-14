@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= description %>">
+    <meta name="author" content="<%= author %>">
+
+    <!-- styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+  <div class="navbar navbar-inverse">
+  	<div class="navbar-inner">
+  		<div class="container-fluid">
+  			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  				<span class="icon-bar"></span>
+  				<span class="icon-bar"></span>
+  				<span class="icon-bar"></span>
+  			</a>
+  			<a class="brand" href="#" name="top"> <img src="/img/mylibrary-logo-mini.png"></img></a>
+  			<div class="nav-collapse collapse">
+  				<ul class="nav">
+  					<li><a href="/medias"><i class="icon-home icon-white"></i> Medias</a></li>
+  					<li class="divider-vertical"></li>
+  					<li><a href="/groups"><i class="icon-group icon-white"></i> Groups</a></li>
+  					<li class="divider-vertical"></li>
+  					<li><a href="/users"><i class="icon-user icon-white"></i> Members</a></li>
+  					<li class="divider-vertical"></li>
+  				</ul>
+  				<div class="pull-right">
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <button class="btn active">All</button>
+                            <button class="btn">Starred</button>
+                        </li>
+                        <li>  </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <form class="form-search">
+                                <div class="input-append">
+                                    <input type="text" class="span2">
+                                    <button type="submit" class="btn">Search</button>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-user"></i> admin	<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="icon-share"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+  			</div>
+  			<!--/.nav-collapse -->
+  		</div>
+  		<!--/.container-fluid -->
+  	</div>
+  	<!--/.navbar-inner -->
+  </div>
+  <!--/.navbar -->
+
+<div class='span3'>
+    <div class="sidebar-nav">
+    	<div class="well" style="width:200px; padding: 8px 0;">
+    		<ul class="nav nav-list">
+    		  <li class="nav-header">Menu</li>
+    		  <li><a href="/medias"><i class="icon-home"></i> Medias</a></li>
+              <li><a href="/groups"><i class="icon-group"></i> Groups</a></li>
+    		  <li><a href="/users"><i class="icon-user"></i> Members</a></li>
+              <li class="divider"></li>
+    		  <li class='active'><a href="#"><i class="icon-wrench"></i> Settings</a></li>
+    		  <li><a href="#"><i class="icon-share"></i> Logout</a></li>
+    		</ul>
+    	</div>
+    </div>
+
+
+
+</div>
+<div class="span9">
+    <ul class="breadcrumb">
+        <% if(typeof breadcrumbs != 'undefined') {%>
+            <% for(var i=0; i<breadcrumbs.length; i++) { %>
+                <% if(i == breadcrumbs.length -1 ) {%>
+                    <li class="active"><%= breadcrumbs[i].name%></li>
+                <% } else {%>
+                    <li><a href="<%= breadcrumbs[i].url%>"><%= breadcrumbs[i].name%></a> \</li>
+                <% }%>
+            <% }%>
+        <% }%>
+    </ul>
+
+    <%- body %>
+</div>
+
+
+
+        <script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
+        <script type="text/javascript" src='/js/bootstrap.min.js'></script>
+  </body>
+</html>
+

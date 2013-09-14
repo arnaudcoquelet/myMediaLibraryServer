@@ -1,0 +1,54 @@
+<div class="well">
+	<div class="row">
+		<div class="span1">
+            <a href="/groups" class="thumbnail">
+                <i class="icon-group icon-4x"></i>
+            </a>
+        </div>
+		<div class="span3">
+          	<p><strong><%= group.value.name %></strong></p>
+            <p>Member(s): <span class="label label-info"><%= group.value.users.length%> </span>
+                <a href="#myModalAddUsersToGroup" data-toggle="modal"><span class="label label-success">   Add   </span></a>
+            </p>
+            <% for(var i=0; i< group.value.users.length; i++) { %>
+            <ul class="thumbnails">
+                <li class="span5 ">
+                        <% if(typeof group.value.users[i].id == 'undefined') {%>
+                        <a href="/users/<%= group.value.users[i]%>" class="thumbnail">
+                            <i class="icon-user"></i> <strong> <%=  group.value.users[i] %> </strong>
+                        </a>
+                        <%} else {%>
+                        <a href="/users/<%= group.value.users[i].id%>" class="thumbnail">
+                            <i class="icon-user"></i> <strong> <%=  group.value.users[i].name %> </strong>
+                        </a>
+                        <% } %>
+                </li>
+            </ul>
+            <% } %>
+		</div>
+	</div>
+
+<div class="modal small hide" id="myModalAddUsersToGroup">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Users</h3>
+    </div>
+    <div class="modal-body">
+        <form method="post" action='/groups/<%= group.value.id%>/addUsers'>
+
+            <!-- Select Multiple -->
+            <div class="control-group">
+              <label class="control-label" for="selectmultiple">Select Multiple</label>
+              <div class="controls">
+                <select id="selectmultiple" name="selectmultiple" class="input-xlarge" multiple="multiple">
+                  <option>Option one</option>
+                  <option>Option two</option>
+                </select>
+              </div>
+            </div>
+            <p><button type="submit" class="btn btn-primary">Assigned</button></p>
+        </form>
+    </div>
+</div>
+
+
